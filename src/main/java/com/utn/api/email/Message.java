@@ -1,9 +1,11 @@
 package com.utn.api.email;
 
 import org.joda.time.DateTime;
+import org.springframework.stereotype.Service;
 
+@Service
 public class Message {
-    //todo implementar @service
+
     private User user;
     private DateTime fecha;
     private User subject;

@@ -1,8 +1,10 @@
 package com.utn.api.email;
 
+import org.springframework.stereotype.Service;
 
+@Service
 public class User {
-    //todo implementar @service
+
     private String userName;
     private String pass;
     private String name;
