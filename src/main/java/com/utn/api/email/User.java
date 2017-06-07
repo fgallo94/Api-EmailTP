@@ -15,6 +15,8 @@ public class User {
     private boolean eliminado;
     private int id;
 
+    //TODO ACTUALIZAR CLASE USER
+
     public User(){
         userName="";
         pass="";
