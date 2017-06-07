@@ -3,112 +3,127 @@ package com.utn.api.email;
 
 import com.utn.api.email.dao.DaoMessages;
 import com.utn.api.email.dao.DaoUsers;
+import com.utn.api.email.response.LoginResponseWrapper;
+import com.utn.api.email.util.SessionData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
 
 @Controller
 public class Control {
+
     @Autowired
     private DaoMessages daoMessages;
     @Autowired
     private DaoUsers daoUsers;
 
+    @Autowired
+    SessionData sessionData;
+
     @RequestMapping(value = "/api/Message/Send", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity sendMessage(@RequestBody Message message){
+    public ResponseEntity sendMessage(@RequestBody Message message) {
         try {
             daoMessages.send(message);
             return new ResponseEntity(HttpStatus.CREATED);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @RequestMapping(value = "/api/Message/Inbox",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/Message/Inbox", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity inbox(){
+    public ResponseEntity inbox(@RequestHeader("usuario") String userName) {
         try {
-            //TODO falta poder traer el user
-            daoMessages.inbox();
+            User u =daoUsers.byUser(userName);
+            daoMessages.inbox(u);
             return new ResponseEntity(HttpStatus.OK);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
     }
 
-    @RequestMapping(value = "/api/Message/Delete",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/Message/Delete", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity deleteMessage(@RequestBody Message message){
+    public ResponseEntity deleteMessage(@RequestBody Message message) {
         try {
             daoMessages.delete(message);
             return new ResponseEntity(HttpStatus.OK);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
     }
 
-    @RequestMapping(value = "/api/Message/Trash",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/Message/Trash", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity listTrash(){
+    public ResponseEntity listTrash(@RequestHeader("usuario") String userName) {
         try {
-            //TODO falta poder traer el user
-            daoMessages.trash();
+            User u =daoUsers.byUser(userName);
+            daoMessages.trash(u);
             return new ResponseEntity(HttpStatus.OK);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
     }
 
-    @RequestMapping(value = "/api/User/ListUser",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/User/ListUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity listUser(){
+    public ResponseEntity listUser() {
         try {
             daoUsers.listUser();
             return new ResponseEntity(HttpStatus.OK);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
     }
 
     @RequestMapping(value = "/api/User/AddUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity addUser(@RequestBody User user){
+    public ResponseEntity addUser(@RequestBody User user) {
         try {
             daoUsers.addUser(user);
             return new ResponseEntity(HttpStatus.CREATED);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @RequestMapping(value = "/api/User/Delete", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteUser(@RequestBody User user){
+    public ResponseEntity deleteUser(@RequestBody User user) {
         try {
             daoUsers.delete(user);
             return new ResponseEntity(HttpStatus.OK);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
     }
 
 
-    //TODO /Login
-    //TODO /Logout
+
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseEntity getById(@RequestParam("user") String nombreUsuario, @RequestParam("pwd") String pwd){
+        try {
+            User u = daoUsers.byUserName(nombreUsuario, pwd);
+            if (null != u) {
+                String sessionId = sessionData.addSession(u);
+                return new ResponseEntity<LoginResponseWrapper>(new LoginResponseWrapper(sessionId), HttpStatus.OK);
+            }
+        }catch(Exception e) {
+            return new ResponseEntity(HttpStatus.FORBIDDEN);
+        }
+        return null;
+    }
+
+
+    @RequestMapping("/logout")
+    public @ResponseBody ResponseEntity getById(@RequestHeader("sessionid") String sessionId) {
+        sessionData.removeSession(sessionId);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
 
 
 
