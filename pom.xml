@@ -5,7 +5,7 @@
   <groupId>com.utn.api.email</groupId>
   <artifactId>ApiEmail</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
 
   <name>ApiEmail</name>
   <url>http://maven.apache.org</url>
