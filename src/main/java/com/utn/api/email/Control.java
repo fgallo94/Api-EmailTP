@@ -23,7 +23,7 @@ public class Control {
     @Autowired
     private DaoUsers daoUsers;
 
-    @RequestMapping(value = "/Message/Send", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/Message/Send", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity sendMessage(@RequestBody Message message){
         try {
             daoMessages.send(message);
@@ -34,15 +34,84 @@ public class Control {
         }
     }
 
-    @RequestMapping(value = "/Message/Inbox",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/Message/Inbox",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ArrayList<Message> inbox()
-    {
-        return daoMessages.inbox();
+    public ResponseEntity inbox(){
+        try {
+            //TODO falta poder traer el user
+            daoMessages.inbox();
+            return new ResponseEntity(HttpStatus.OK);
+        }catch (Exception e)
+        {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @RequestMapping(value = "/api/Message/Delete",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity deleteMessage(@RequestBody Message message){
+        try {
+            daoMessages.delete(message);
+            return new ResponseEntity(HttpStatus.OK);
+        }catch (Exception e)
+        {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
+    }
+
+    @RequestMapping(value = "/api/Message/Trash",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity listTrash(){
+        try {
+            //TODO falta poder traer el user
+            daoMessages.trash();
+            return new ResponseEntity(HttpStatus.OK);
+        }catch (Exception e)
+        {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @RequestMapping(value = "/api/User/ListUser",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity listUser(){
+        try {
+            daoUsers.listUser();
+            return new ResponseEntity(HttpStatus.OK);
+        }catch (Exception e)
+        {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @RequestMapping(value = "/api/User/AddUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity addUser(@RequestBody User user){
+        try {
+            daoUsers.addUser(user);
+            return new ResponseEntity(HttpStatus.CREATED);
+        }catch (Exception e)
+        {
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/api/User/Delete", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deleteUser(@RequestBody User user){
+        try {
+            daoUsers.delete(user);
+            return new ResponseEntity(HttpStatus.OK);
+        }catch (Exception e)
+        {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
     }
 
 
-    //todo golpes con la api
+    //TODO /Login
+    //TODO /Logout
+
+
+
 
 
 }
