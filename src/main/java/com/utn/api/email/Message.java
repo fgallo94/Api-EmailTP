@@ -3,24 +3,27 @@ package com.utn.api.email;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
+import java.security.Timestamp;
+import java.util.Date;
+
 @Service
 public class Message {
 
     private User user;
-    private DateTime fecha;
+    private String fecha;
     private User recipient;
     private String subject;
     private String body;
 
     public Message() {
         user = new User();
-        fecha = DateTime.now();
+        fecha = "";
         subject = "";
         recipient = new User();
         body = "";
     }
 
-    public Message(User user, DateTime fecha, User recipient, String subject, String Body) {
+    public Message(User user, String fecha, User recipient, String subject, String Body) {
         this.user = user;
         this.fecha = fecha;
         this.recipient = recipient;
@@ -58,11 +61,11 @@ public class Message {
         this.user = user;
     }
 
-    public DateTime getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(DateTime fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

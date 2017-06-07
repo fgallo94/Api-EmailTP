@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 @Repository
@@ -56,8 +57,11 @@ public class DaoMessages {
                 m.setUser(daoUsers.byId(rs.getInt("id_usuario")));
                 m.setRecipient(daoUsers.byId(rs.getInt("id_usuario_destinatario")));
                 m.setBody(rs.getString("body"));
-                //TODO IMPLEMENTAR DATETIME DE MYSQL A JAVA
-                // m.setFecha(rs.getDate("fecha");
+                Timestamp timestamp = rs.getTimestamp("fecha");
+                java.util.Date date = timestamp;
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String currentTime = sdf.format(date);
+                m.setFecha(currentTime);
                 m.setSubject(rs.getString("subject"));
                 lista.add(m);
             }
@@ -74,7 +78,7 @@ public class DaoMessages {
     }
 
     public void delete(Message message) throws Exception{
-        String sq="update Messages set deleted=true where subject=?, body=?";
+        String sq="update Messages set deleted=true where subject=? and body=?";
         try{
             conn.conectar();
             PreparedStatement st= conn.getConn().prepareStatement(sq);
@@ -93,11 +97,12 @@ public class DaoMessages {
     }
 
     public ArrayList<Message> trash(User user) throws Exception {
-        String sq = "select * from Messages where deleted=true";
+        String sq = "select * from Messages where deleted=true and id_usuario=?";
         ArrayList<Message> lista = new ArrayList<Message>();
         try {
             conn.conectar();
             PreparedStatement st = conn.getConn().prepareStatement(sq);
+            st.setInt(1,user.getId());
             ResultSet rs = st.executeQuery();
             if (rs == null) {
                 System.out.println(" No hay registros en la base de datos");
@@ -107,8 +112,11 @@ public class DaoMessages {
                 m.setUser(daoUsers.byId(rs.getInt("id_usuario")));
                 m.setRecipient(daoUsers.byId(rs.getInt("id_usuario_destinatario")));
                 m.setBody(rs.getString("body"));
-                //TODO IMPLEMENTAR DATETIME DE MYSQL A JAVA
-                // m.setFecha(rs.getDate("fecha");
+                Timestamp timestamp = rs.getTimestamp("fecha");
+                java.util.Date date = timestamp;
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String currentTime = sdf.format(date);
+                m.setFecha(currentTime);
                 m.setSubject(rs.getString("subject"));
                 lista.add(m);
             }
