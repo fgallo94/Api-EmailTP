@@ -12,16 +12,27 @@ public class User {
     private String pass;
     private String name;
     private String surname;
+    private String adress;
+    private String phone;
+    private String city;
+    private String state;
+    private String country;
+    private String email;
     private boolean eliminado;
     private int id;
 
-    //TODO ACTUALIZAR CLASE USER
 
     public User(){
         userName="";
         pass="";
         name="";
         surname="";
+        adress="";
+        phone="";
+        city="";
+        state="";
+        country="";
+        email="";
         eliminado=false;
         try {
             id = daoUsers.lastInsertId();
@@ -30,11 +41,18 @@ public class User {
         }
     }
 
-    public User(String userName, String pass, String name, String surname){
+    public User(String userName, String pass, String name, String surname,
+    String adress, String phone, String city, String state, String country,String email){
         this.userName=userName;
         this.pass=pass;
         this.name=name;
         this.surname=surname;
+        this.adress=adress;
+        this.phone=phone;
+        this.city=city;
+        this.state=state;
+        this.country=country;
+        this.email=email;
     }
 
     @Override
@@ -61,6 +79,55 @@ public class User {
         result = 31 * result + (eliminado ? 1 : 0);
         result = 31 * result + id;
         return result;
+    }
+
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUserName() {

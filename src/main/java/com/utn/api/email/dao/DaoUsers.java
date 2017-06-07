@@ -29,6 +29,12 @@ public class DaoUsers {
             u.setPass(rs.getString("password"));
             u.setUserName(rs.getString("username"));
             u.setEliminado(rs.getBoolean("deleted"));
+            u.setAdress(rs.getString("adress"));
+            u.setPhone(rs.getString("phone"));
+            u.setCity(rs.getString("city"));
+            u.setState(rs.getString("state"));
+            u.setCountry(rs.getString("country"));
+            u.setEmail(rs.getString("email"));
         } catch (SQLException s) {
             s.printStackTrace();
         } finally {
@@ -42,7 +48,7 @@ public class DaoUsers {
     }
 
     public void addUser(User user) throws Exception {
-        String sq = "insert into Users(id,username,password,name,surname,deleted) values (?,?,?,?,?,?)";
+        String sq = "insert into Users(id,username,password,name,surname,deleted,adress,phone,city,state,country,email) values (?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             conn.conectar();
             PreparedStatement st = conn.getConn().prepareStatement(sq);
@@ -52,6 +58,12 @@ public class DaoUsers {
             st.setString(4, user.getName());
             st.setString(5,user.getSurname());
             st.setBoolean(6,user.isEliminado());
+            st.setString(7,user.getAdress());
+            st.setString(8,user.getPhone());
+            st.setString(9,user.getCity());
+            st.setString(10,user.getState());
+            st.setString(11,user.getCountry());
+            st.setString(12,user.getEmail());
             st.executeUpdate();
         }
         //Se ejecuta excepcion en caso de error
@@ -85,6 +97,12 @@ public class DaoUsers {
                 u.setPass(rs.getString("password"));
                 u.setUserName(rs.getString("username"));
                 u.setEliminado(rs.getBoolean("deleted"));
+                u.setAdress(rs.getString("adress"));
+                u.setPhone(rs.getString("phone"));
+                u.setCity(rs.getString("city"));
+                u.setState(rs.getString("state"));
+                u.setCountry(rs.getString("country"));
+                u.setEmail(rs.getString("email"));
                 lista.add(u);
             }
         } catch (SQLException s) {
