@@ -8,21 +8,24 @@ public class Message {
 
     private User user;
     private DateTime fecha;
-    private User subject;
+    private User recipient;
+    private String subject;
     private String body;
 
-    public Message(){
-        user=new User();
-        fecha= DateTime.now();
-        subject= new User();
-        body="";
+    public Message() {
+        user = new User();
+        fecha = DateTime.now();
+        subject = "";
+        recipient = new User();
+        body = "";
     }
 
-    public Message(User user, DateTime fecha, User subject, String Body){
-        this.user=user;
-        this.fecha=fecha;
-        this.subject=subject;
-        this.body=body;
+    public Message(User user, DateTime fecha, User recipient, String subject, String Body) {
+        this.user = user;
+        this.fecha = fecha;
+        this.recipient = recipient;
+        this.subject = subject;
+        this.body = body;
     }
 
     @Override
@@ -63,18 +66,25 @@ public class Message {
         this.fecha = fecha;
     }
 
-    public User getSubject() {
+    public User getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(User recipient) {
+        this.recipient = recipient;
+    }
+
+
+    public String getSubject() {
         return subject;
     }
 
-    public void setSubject(User subject) {
+    public void setSubject(String subject) {
         this.subject = subject;
     }
 
-    public String getBody() {
-        return body;
-    }
 
+    public String getBody(){return body;}
     public void setBody(String body) {
         this.body = body;
     }
