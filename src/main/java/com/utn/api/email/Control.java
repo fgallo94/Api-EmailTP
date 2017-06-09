@@ -23,7 +23,7 @@ public class Control {
     @Autowired
     private DaoUsers daoUsers;
 
-// Federido: los endpoints no se diferencian por agregar una expresion  regular mas...
+// Federico: los endpoints no se diferencian por agregar una expresion  regular mas...
 // la idea es que la peticion base sea api/Message... si le pegas por get, trae los mensajes... si le pegas por post, envia un mensaje
 // y si le pegas por DELETE, enviando un id de mensaje, lo borra... 
 // tenes que hacer asi con todos los request solicitados...    
@@ -39,6 +39,7 @@ public class Control {
         }
     }
 
+    // donde retorna los mensajes??
     @RequestMapping(value = "/api/Message/Inbox",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity inbox(){
@@ -77,6 +78,8 @@ public class Control {
         }
     }
 
+    // donde retorna los usuarios?? 
+    // trabajar con un wrapper...
     @RequestMapping(value = "/api/User/ListUser",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity listUser(){
