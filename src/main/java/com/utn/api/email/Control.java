@@ -23,6 +23,11 @@ public class Control {
     @Autowired
     private DaoUsers daoUsers;
 
+// Federido: los endpoints no se diferencian por agregar una expresion  regular mas...
+// la idea es que la peticion base sea api/Message... si le pegas por get, trae los mensajes... si le pegas por post, envia un mensaje
+// y si le pegas por DELETE, enviando un id de mensaje, lo borra... 
+// tenes que hacer asi con todos los request solicitados...    
+    
     @RequestMapping(value = "/api/Message/Send", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity sendMessage(@RequestBody Message message){
         try {
