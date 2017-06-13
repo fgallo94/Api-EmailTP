@@ -3,9 +3,7 @@ package com.utn.api.email.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Created by pablo on 02/11/16.
- */
+
 public class LoginResponseWrapper {
 
     @JsonProperty

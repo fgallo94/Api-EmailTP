@@ -103,7 +103,7 @@ public class Control {
 
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     ResponseEntity getById(@RequestParam("user") String nombreUsuario, @RequestParam("pwd") String pwd){
         try {
@@ -119,7 +119,7 @@ public class Control {
     }
 
 
-    @RequestMapping("/logout")
+    @RequestMapping(value="/logout",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity getById(@RequestHeader("sessionid") String sessionId) {
         sessionData.removeSession(sessionId);
         return new ResponseEntity(HttpStatus.ACCEPTED);
