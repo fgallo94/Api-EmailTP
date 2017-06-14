@@ -1,12 +1,7 @@
 package com.utn.api.email;
 
-import org.joda.time.DateTime;
-import org.springframework.stereotype.Service;
 
-import java.security.Timestamp;
-import java.util.Date;
 
-@Service
 public class Message {
 
     private User user;

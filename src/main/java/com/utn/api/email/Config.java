@@ -13,8 +13,6 @@ public class Config {
     @Autowired
     AuthFilter authFilter;
 
-    @Value("${date.format}")
-    String dateFormat;
 
 
     @Bean

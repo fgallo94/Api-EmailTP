@@ -111,11 +111,13 @@ public class Control {
             if (null != u) {
                 String sessionId = sessionData.addSession(u);
                 return new ResponseEntity<LoginResponseWrapper>(new LoginResponseWrapper(sessionId), HttpStatus.OK);
+            }else{
+                return new ResponseEntity(HttpStatus.CONFLICT);
             }
         }catch(Exception e) {
             return new ResponseEntity(HttpStatus.FORBIDDEN);
         }
-        return null;
+
     }
 
 
