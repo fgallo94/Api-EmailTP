@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 
 @Controller
 public class Control {
@@ -36,7 +38,7 @@ public class Control {
 
     @RequestMapping(value = "/api/Message/Inbox", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity inbox(@RequestHeader("usuario") String userName) {
+    public ResponseEntity inbox(@RequestHeader("user") String userName) {
         try {
             User u =daoUsers.byUser(userName);
             daoMessages.inbox(u);
@@ -59,7 +61,7 @@ public class Control {
 
     @RequestMapping(value = "/api/Message/Trash", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity listTrash(@RequestHeader("usuario") String userName) {
+    public ResponseEntity listTrash(@RequestHeader("user") String userName) {
         try {
             User u =daoUsers.byUser(userName);
             daoMessages.trash(u);
@@ -71,10 +73,10 @@ public class Control {
 
     @RequestMapping(value = "/api/User/ListUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity listUser() {
+    public ResponseEntity<ArrayList<User>> listUser() {
         try {
-            daoUsers.listUser();
-            return new ResponseEntity(HttpStatus.OK);
+            ArrayList<User> lista=daoUsers.listUser();
+            return new ResponseEntity<ArrayList<User>>(lista,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
@@ -103,16 +105,15 @@ public class Control {
 
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    ResponseEntity getById(@RequestParam("user") String nombreUsuario, @RequestParam("pwd") String pwd){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public @ResponseBody ResponseEntity getById(@RequestHeader("user") String nombreUsuario, @RequestHeader("pwd") String pwd){
         try {
             User u = daoUsers.byUserName(nombreUsuario, pwd);
             if (null != u) {
                 String sessionId = sessionData.addSession(u);
                 return new ResponseEntity<LoginResponseWrapper>(new LoginResponseWrapper(sessionId), HttpStatus.OK);
             }else{
-                return new ResponseEntity(HttpStatus.CONFLICT);
+                return new ResponseEntity(HttpStatus.UNAUTHORIZED);
             }
         }catch(Exception e) {
             return new ResponseEntity(HttpStatus.FORBIDDEN);
@@ -120,6 +121,16 @@ public class Control {
 
     }
 
+    @RequestMapping(value= "/traer",method = RequestMethod.GET)
+    public @ResponseBody ResponseEntity<ArrayList<User>> traer() {
+        try {
+            System.out.printf("aca entra");
+            ArrayList<User> lista=daoUsers.listUser();
+            return new ResponseEntity<ArrayList<User>> (lista,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+    }
 
     @RequestMapping(value="/logout",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity getById(@RequestHeader("sessionid") String sessionId) {

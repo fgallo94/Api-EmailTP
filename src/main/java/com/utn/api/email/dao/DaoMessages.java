@@ -44,7 +44,7 @@ public class DaoMessages {
     }
 
     public ArrayList<Message> inbox(User user) throws Exception {
-        String sq = "select * from Messages m where id_usuario=? order by m.fecha(desc)";
+        String sq = "select * from Messages m where m.id_usuario=? order by m.fecha";
         ArrayList<Message> lista = new ArrayList<Message>();
         try {
             conn.conectar();
@@ -99,7 +99,7 @@ public class DaoMessages {
     }
 
     public ArrayList<Message> trash(User user) throws Exception {
-        String sq = "select * from Messages m where deleted=true and id_usuario=? order by m.fecha(desc)";
+        String sq = "select * from Messages m where deleted=true and m.id_usuario=? order by m.fecha";
         ArrayList<Message> lista = new ArrayList<Message>();
         try {
             conn.conectar();

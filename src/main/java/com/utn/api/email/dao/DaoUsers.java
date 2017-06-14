@@ -17,7 +17,7 @@ public class DaoUsers {
 
 
     public User byUserName(String user,String pwd) throws Exception {
-        String sq = "select * from Users where username=? and pass=?";
+        String sq = "select * from Users where username=? and password=?";
         User u= new User();
         try {
             conn.conectar();
@@ -25,21 +25,22 @@ public class DaoUsers {
             st.setString(1, user);
             st.setString(2,pwd);
             ResultSet rs = st.executeQuery();
-            if (rs == null) {
+            if (!rs.next()) {
                 System.out.println(" No hay registros en la base de datos");
+            }else {
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("name"));
+                u.setSurname(rs.getString("surname"));
+                u.setPass(rs.getString("password"));
+                u.setUserName(rs.getString("username"));
+                u.setEliminado(rs.getBoolean("deleted"));
+                u.setAdress(rs.getString("adress"));
+                u.setPhone(rs.getString("phone"));
+                u.setCity(rs.getString("city"));
+                u.setState(rs.getString("state"));
+                u.setCountry(rs.getString("country"));
+                u.setEmail(rs.getString("email"));
             }
-            u.setId(rs.getInt("id"));
-            u.setName(rs.getString("name"));
-            u.setSurname(rs.getString("surname"));
-            u.setPass(rs.getString("password"));
-            u.setUserName(rs.getString("username"));
-            u.setEliminado(rs.getBoolean("deleted"));
-            u.setAdress(rs.getString("adress"));
-            u.setPhone(rs.getString("phone"));
-            u.setCity(rs.getString("city"));
-            u.setState(rs.getString("state"));
-            u.setCountry(rs.getString("country"));
-            u.setEmail(rs.getString("email"));
         } catch (SQLException s) {
             s.printStackTrace();
         } finally {
@@ -60,22 +61,22 @@ public class DaoUsers {
             PreparedStatement st = conn.getConn().prepareStatement(sq);
             st.setString(1, user);
             ResultSet rs = st.executeQuery();
-            if (rs == null) {
+            if (!rs.next()) {
                 System.out.println(" No hay registros en la base de datos");
-            }
-            u.setId(rs.getInt("id"));
-            u.setName(rs.getString("name"));
-            u.setSurname(rs.getString("surname"));
-            u.setPass(rs.getString("password"));
-            u.setUserName(rs.getString("username"));
-            u.setEliminado(rs.getBoolean("deleted"));
-            u.setAdress(rs.getString("adress"));
-            u.setPhone(rs.getString("phone"));
-            u.setCity(rs.getString("city"));
-            u.setState(rs.getString("state"));
-            u.setCountry(rs.getString("country"));
-            u.setEmail(rs.getString("email"));
-        } catch (SQLException s) {
+            }else {
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("name"));
+                u.setSurname(rs.getString("surname"));
+                u.setPass(rs.getString("password"));
+                u.setUserName(rs.getString("username"));
+                u.setEliminado(rs.getBoolean("deleted"));
+                u.setAdress(rs.getString("adress"));
+                u.setPhone(rs.getString("phone"));
+                u.setCity(rs.getString("city"));
+                u.setState(rs.getString("state"));
+                u.setCountry(rs.getString("country"));
+                u.setEmail(rs.getString("email"));
+            }} catch (SQLException s) {
             s.printStackTrace();
         } finally {
             try {
@@ -95,22 +96,22 @@ public class DaoUsers {
             PreparedStatement st = conn.getConn().prepareStatement(sq);
             st.setInt(1, user);
             ResultSet rs = st.executeQuery();
-            if (rs == null) {
+            if (!rs.next()) {
                 System.out.println(" No hay registros en la base de datos");
-            }
-            u.setId(rs.getInt("id"));
-            u.setName(rs.getString("name"));
-            u.setSurname(rs.getString("surname"));
-            u.setPass(rs.getString("password"));
-            u.setUserName(rs.getString("username"));
-            u.setEliminado(rs.getBoolean("deleted"));
-            u.setAdress(rs.getString("adress"));
-            u.setPhone(rs.getString("phone"));
-            u.setCity(rs.getString("city"));
-            u.setState(rs.getString("state"));
-            u.setCountry(rs.getString("country"));
-            u.setEmail(rs.getString("email"));
-        } catch (SQLException s) {
+            }else {
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("name"));
+                u.setSurname(rs.getString("surname"));
+                u.setPass(rs.getString("password"));
+                u.setUserName(rs.getString("username"));
+                u.setEliminado(rs.getBoolean("deleted"));
+                u.setAdress(rs.getString("adress"));
+                u.setPhone(rs.getString("phone"));
+                u.setCity(rs.getString("city"));
+                u.setState(rs.getString("state"));
+                u.setCountry(rs.getString("country"));
+                u.setEmail(rs.getString("email"));
+            }} catch (SQLException s) {
             s.printStackTrace();
         } finally {
             try {

@@ -31,11 +31,7 @@ public class User {
         country="";
         email="";
         eliminado=false;
-        try {
-            id = daoUsers.lastInsertId();
-        }catch(Exception s ){
-            s.printStackTrace();
-        }
+        id=0;
     }
 
     public User(String userName, String pass, String name, String surname,
