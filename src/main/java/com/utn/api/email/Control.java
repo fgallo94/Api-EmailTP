@@ -26,7 +26,7 @@ public class Control {
     @Autowired
     SessionData sessionData;
 
-    @RequestMapping(value = "/api/Message/Send", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/Message/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity sendMessage(@RequestBody Message message) {
         try {
             daoMessages.send(message);
@@ -48,7 +48,7 @@ public class Control {
         }
     }
 
-    @RequestMapping(value = "/api/Message/Delete", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/Message/", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity deleteMessage(@RequestBody Message message) {
         try {
@@ -71,7 +71,7 @@ public class Control {
         }
     }
 
-    @RequestMapping(value = "/api/User/ListUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/User/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<ArrayList<User>> listUser() {
         try {
@@ -82,7 +82,7 @@ public class Control {
         }
     }
 
-    @RequestMapping(value = "/api/User/AddUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/User/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addUser(@RequestBody User user) {
         try {
             daoUsers.addUser(user);
@@ -92,7 +92,7 @@ public class Control {
         }
     }
 
-    @RequestMapping(value = "/api/User/Delete", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/User/", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deleteUser(@RequestBody User user) {
         try {
             daoUsers.delete(user);
@@ -119,17 +119,6 @@ public class Control {
             return new ResponseEntity(HttpStatus.FORBIDDEN);
         }
 
-    }
-
-    @RequestMapping(value= "/traer",method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity<ArrayList<User>> traer() {
-        try {
-            System.out.printf("aca entra");
-            ArrayList<User> lista=daoUsers.listUser();
-            return new ResponseEntity<ArrayList<User>> (lista,HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }
     }
 
     @RequestMapping(value="/logout",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
