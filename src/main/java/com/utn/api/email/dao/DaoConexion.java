@@ -9,15 +9,8 @@ import java.sql.SQLException;
 @Repository
 public class DaoConexion {
     private Connection conn;
-    private static DaoConexion instancia;
 
-    //Patron Singleton
-    public static DaoConexion getInstancia() {
-        if (instancia == null) {
-            instancia = new DaoConexion();
-        }
-        return instancia;
-    }
+
     //Verifica los drivers en la conexion
     public DaoConexion() {
         try {

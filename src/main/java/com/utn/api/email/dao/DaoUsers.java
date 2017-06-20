@@ -1,8 +1,10 @@
 package com.utn.api.email.dao;
 
 import com.utn.api.email.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.websocket.Session;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,31 +12,35 @@ import java.util.ArrayList;
 
 @Repository
 public class DaoUsers {
-    private DaoConexion conn = DaoConexion.getInstancia();
+    @Autowired
+    private DaoConexion conn;
 
-    public User byId(int user) throws Exception {
-        String sq = "select * from Users where id=?";
+
+    public User byUserName(String user,String pwd) throws Exception {
+        String sq = "select * from Users where username=? and password=?";
         User u= new User();
         try {
             conn.conectar();
             PreparedStatement st = conn.getConn().prepareStatement(sq);
-            st.setInt(1, user);
+            st.setString(1, user);
+            st.setString(2,pwd);
             ResultSet rs = st.executeQuery();
-            if (rs == null) {
+            if (!rs.next()) {
                 System.out.println(" No hay registros en la base de datos");
+            }else {
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("name"));
+                u.setSurname(rs.getString("surname"));
+                u.setPass(rs.getString("password"));
+                u.setUserName(rs.getString("username"));
+                u.setEliminado(rs.getBoolean("deleted"));
+                u.setAdress(rs.getString("adress"));
+                u.setPhone(rs.getString("phone"));
+                u.setCity(rs.getString("city"));
+                u.setState(rs.getString("state"));
+                u.setCountry(rs.getString("country"));
+                u.setEmail(rs.getString("email"));
             }
-            u.setId(rs.getInt("id"));
-            u.setName(rs.getString("name"));
-            u.setSurname(rs.getString("surname"));
-            u.setPass(rs.getString("password"));
-            u.setUserName(rs.getString("username"));
-            u.setEliminado(rs.getBoolean("deleted"));
-            u.setAdress(rs.getString("adress"));
-            u.setPhone(rs.getString("phone"));
-            u.setCity(rs.getString("city"));
-            u.setState(rs.getString("state"));
-            u.setCountry(rs.getString("country"));
-            u.setEmail(rs.getString("email"));
         } catch (SQLException s) {
             s.printStackTrace();
         } finally {
@@ -46,6 +52,80 @@ public class DaoUsers {
         }
         return u;
     }
+
+    public User byUser(String user) throws Exception {
+        String sq = "select * from Users where username=?";
+        User u= new User();
+        try {
+            conn.conectar();
+            PreparedStatement st = conn.getConn().prepareStatement(sq);
+            st.setString(1, user);
+            ResultSet rs = st.executeQuery();
+            if (!rs.next()) {
+                System.out.println(" No hay registros en la base de datos");
+            }else {
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("name"));
+                u.setSurname(rs.getString("surname"));
+                u.setPass(rs.getString("password"));
+                u.setUserName(rs.getString("username"));
+                u.setEliminado(rs.getBoolean("deleted"));
+                u.setAdress(rs.getString("adress"));
+                u.setPhone(rs.getString("phone"));
+                u.setCity(rs.getString("city"));
+                u.setState(rs.getString("state"));
+                u.setCountry(rs.getString("country"));
+                u.setEmail(rs.getString("email"));
+            }} catch (SQLException s) {
+            s.printStackTrace();
+        } finally {
+            try {
+                conn.desconectar();
+            } catch (Exception x) {
+                x.printStackTrace();
+            }
+        }
+        return u;
+    }
+
+    public User byId(int user) throws Exception {
+        String sq = "select * from Users where id=?";
+        User u= new User();
+        try {
+            conn.conectar();
+            PreparedStatement st = conn.getConn().prepareStatement(sq);
+            st.setInt(1, user);
+            ResultSet rs = st.executeQuery();
+            if (!rs.next()) {
+                System.out.println(" No hay registros en la base de datos");
+            }else {
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("name"));
+                u.setSurname(rs.getString("surname"));
+                u.setPass(rs.getString("password"));
+                u.setUserName(rs.getString("username"));
+                u.setEliminado(rs.getBoolean("deleted"));
+                u.setAdress(rs.getString("adress"));
+                u.setPhone(rs.getString("phone"));
+                u.setCity(rs.getString("city"));
+                u.setState(rs.getString("state"));
+                u.setCountry(rs.getString("country"));
+                u.setEmail(rs.getString("email"));
+            }} catch (SQLException s) {
+            s.printStackTrace();
+        } finally {
+            try {
+                conn.desconectar();
+            } catch (Exception x) {
+                x.printStackTrace();
+            }
+        }
+        return u;
+    }
+
+
+
+
 
     public void addUser(User user) throws Exception {
         String sq = "insert into Users(id,username,password,name,surname,deleted,adress,phone,city,state,country,email) values (?,?,?,?,?,?,?,?,?,?,?,?)";

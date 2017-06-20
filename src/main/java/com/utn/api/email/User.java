@@ -1,11 +1,8 @@
 package com.utn.api.email;
 
 import com.utn.api.email.dao.DaoUsers;
-import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 
-@Service
 public class User {
     private DaoUsers daoUsers;
     private String userName;
@@ -34,11 +31,7 @@ public class User {
         country="";
         email="";
         eliminado=false;
-        try {
-            id = daoUsers.lastInsertId();
-        }catch(Exception s ){
-            s.printStackTrace();
-        }
+        id=0;
     }
 
     public User(String userName, String pass, String name, String surname,

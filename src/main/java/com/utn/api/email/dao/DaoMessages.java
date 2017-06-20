@@ -2,6 +2,7 @@ package com.utn.api.email.dao;
 
 import com.utn.api.email.Message;
 import com.utn.api.email.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +13,8 @@ import java.util.ArrayList;
 @Repository
 public class DaoMessages {
     //Genera una instancia de la clase Conexion
-    private DaoConexion conn = DaoConexion.getInstancia();
+    @Autowired
+    private DaoConexion conn;
     private DaoUsers daoUsers;
 
     public void send(Message message) throws Exception {
@@ -42,7 +44,7 @@ public class DaoMessages {
     }
 
     public ArrayList<Message> inbox(User user) throws Exception {
-        String sq = "select * from Messages m where id_usuario=? order by m.fecha(desc)";
+        String sq = "select * from Messages m where m.id_usuario=? order by m.fecha";
         ArrayList<Message> lista = new ArrayList<Message>();
         try {
             conn.conectar();
@@ -97,7 +99,7 @@ public class DaoMessages {
     }
 
     public ArrayList<Message> trash(User user) throws Exception {
-        String sq = "select * from Messages m where deleted=true and id_usuario=? order by m.fecha(desc)";
+        String sq = "select * from Messages m where deleted=true and m.id_usuario=? order by m.fecha";
         ArrayList<Message> lista = new ArrayList<Message>();
         try {
             conn.conectar();
