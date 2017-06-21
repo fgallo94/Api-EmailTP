@@ -8,5 +8,6 @@ notifications:
       - federicogallo1994@hotmail.com
     on_success: always
     on_failure: always
+   script: "mvn cobertura:cobertura"
 after_success:
-- bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash) -t 3e3f8628-e6bf-4ac6-b010-4acbb0cf172f
