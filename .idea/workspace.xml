@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="149efcec-a8d6-4b7c-9eba-5c393bc1e4c9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ApiEmail.iml" afterPath="$PROJECT_DIR$/ApiEmail.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utn/api/email/App.java" afterPath="$PROJECT_DIR$/src/main/java/com/utn/api/email/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utn/api/email/Config.java" afterPath="$PROJECT_DIR$/src/main/java/com/utn/api/email/Config.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utn/api/email/Control.java" afterPath="$PROJECT_DIR$/src/main/java/com/utn/api/email/Control.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utn/api/email/Message.java" afterPath="$PROJECT_DIR$/src/main/java/com/utn/api/email/Message.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utn/api/email/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/utn/api/email/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utn/api/email/dao/DaoConexion.java" afterPath="$PROJECT_DIR$/src/main/java/com/utn/api/email/dao/DaoConexion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utn/api/email/dao/DaoMessages.java" afterPath="$PROJECT_DIR$/src/main/java/com/utn/api/email/dao/DaoMessages.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utn/api/email/dao/DaoUsers.java" afterPath="$PROJECT_DIR$/src/main/java/com/utn/api/email/dao/DaoUsers.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utn/api/email/response/LoginResponseWrapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/utn/api/email/response/LoginResponseWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utn/api/email/response/UserWrapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/utn/api/email/response/UserWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/utn/api/email/AppTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/utn/api/email/AppTest.java" />
-    </list>
+    <list default="true" id="149efcec-a8d6-4b7c-9eba-5c393bc1e4c9" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -114,8 +99,8 @@
       <file leaf-file-name="UserTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/utn/api/email/UserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="31" column="21" lean-forward="false" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+            <state relative-caret-position="493">
+              <caret line="49" column="29" lean-forward="false" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1099,8 +1084,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/utn/api/email/UserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="31" column="21" lean-forward="false" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+        <state relative-caret-position="493">
+          <caret line="49" column="29" lean-forward="false" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
