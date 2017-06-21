@@ -22,12 +22,12 @@ public class Control {
     private DaoMessages daoMessages;
     @Autowired
     private DaoUsers daoUsers;
-
     @Autowired
     SessionData sessionData;
 
     @RequestMapping(value = "/api/Message/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity sendMessage(@RequestBody Message message) {
+
         try {
             daoMessages.send(message);
             return new ResponseEntity(HttpStatus.CREATED);
@@ -36,11 +36,12 @@ public class Control {
         }
     }
 
+
     @RequestMapping(value = "/api/Message/Inbox", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity inbox(@RequestHeader("user") String userName) {
         try {
-            User u =daoUsers.byUser(userName);
+            User u = daoUsers.byUser(userName);
             daoMessages.inbox(u);
             return new ResponseEntity(HttpStatus.OK);
         } catch (Exception e) {
@@ -63,7 +64,7 @@ public class Control {
     @ResponseBody
     public ResponseEntity listTrash(@RequestHeader("user") String userName) {
         try {
-            User u =daoUsers.byUser(userName);
+            User u = daoUsers.byUser(userName);
             daoMessages.trash(u);
             return new ResponseEntity(HttpStatus.OK);
         } catch (Exception e) {
@@ -71,12 +72,15 @@ public class Control {
         }
     }
 
+
+    //TODO trabajar con un wrapper...
+
     @RequestMapping(value = "/api/User/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<ArrayList<User>> listUser() {
         try {
-            ArrayList<User> lista=daoUsers.listUser();
-            return new ResponseEntity<ArrayList<User>>(lista,HttpStatus.OK);
+            ArrayList<User> lista = daoUsers.listUser();
+            return new ResponseEntity<ArrayList<User>>(lista, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
@@ -102,33 +106,29 @@ public class Control {
         }
     }
 
-
-
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity getById(@RequestHeader("user") String nombreUsuario, @RequestHeader("pwd") String pwd){
+    public
+    @ResponseBody
+    ResponseEntity getById(@RequestHeader("user") String nombreUsuario, @RequestHeader("pwd") String pwd) {
         try {
             User u = daoUsers.byUserName(nombreUsuario, pwd);
             if (null != u) {
                 String sessionId = sessionData.addSession(u);
                 return new ResponseEntity<LoginResponseWrapper>(new LoginResponseWrapper(sessionId), HttpStatus.OK);
-            }else{
+            } else {
                 return new ResponseEntity(HttpStatus.UNAUTHORIZED);
             }
-        }catch(Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity(HttpStatus.FORBIDDEN);
         }
 
     }
 
-    @RequestMapping(value="/logout",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity getById(@RequestHeader("sessionid") String sessionId) {
+    @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public
+    @ResponseBody
+    ResponseEntity getById(@RequestHeader("sessionid") String sessionId) {
         sessionData.removeSession(sessionId);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
-
-
-
-
-
 }
