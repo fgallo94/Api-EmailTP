@@ -4,6 +4,7 @@ package com.utn.api.email;
 import com.utn.api.email.dao.DaoMessages;
 import com.utn.api.email.dao.DaoUsers;
 import com.utn.api.email.response.LoginResponseWrapper;
+import com.utn.api.email.response.UserWrapper;
 import com.utn.api.email.util.SessionData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -77,10 +79,10 @@ public class Control {
 
     @RequestMapping(value = "/api/User/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<ArrayList<User>> listUser() {
+    public ResponseEntity<List<UserWrapper>> listUser() {
         try {
-            ArrayList<User> lista = daoUsers.listUser();
-            return new ResponseEntity<ArrayList<User>>(lista, HttpStatus.OK);
+            List<User> lista = daoUsers.listUser();
+            return new ResponseEntity<List<UserWrapper>>(this.convertList(lista), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
@@ -131,4 +133,21 @@ public class Control {
         sessionData.removeSession(sessionId);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
+
+    private List<UserWrapper> convertList(List<User> users){
+        List<UserWrapper> userWrapperList = new ArrayList<UserWrapper>();
+        for (User u: users) {
+            userWrapperList.add(this.convertUser(u));
+        }
+        return userWrapperList;
+    }
+
+    private UserWrapper convertUser (User user){
+        UserWrapper u = new UserWrapper();
+        u.setName(user.getName());
+        u.setSurname(user.getSurname());
+        u.setEmail(user.getEmail());
+        return u;
+    }
+
 }
