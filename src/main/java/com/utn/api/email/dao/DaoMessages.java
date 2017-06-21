@@ -4,6 +4,7 @@ import com.utn.api.email.Message;
 import com.utn.api.email.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -79,20 +80,20 @@ public class DaoMessages {
         return lista;
     }
 
-    public void delete(Message message) throws Exception{
-        String sq="update Messages set deleted=true where subject=? and body=?";
-        try{
+    public void delete(Message message) throws Exception {
+        String sq = "update Messages set deleted=true where subject=? and body=?";
+        try {
             conn.conectar();
-            PreparedStatement st= conn.getConn().prepareStatement(sq);
-            st.setString(1,message.getSubject());
-            st.setString(2,message.getBody());
+            PreparedStatement st = conn.getConn().prepareStatement(sq);
+            st.setString(1, message.getSubject());
+            st.setString(2, message.getBody());
             st.executeUpdate();
-        }catch(SQLException s){
+        } catch (SQLException s) {
             s.printStackTrace();
-        }finally {
-            try{
+        } finally {
+            try {
                 conn.desconectar();
-            }catch(Exception x){
+            } catch (Exception x) {
                 x.printStackTrace();
             }
         }
@@ -104,7 +105,7 @@ public class DaoMessages {
         try {
             conn.conectar();
             PreparedStatement st = conn.getConn().prepareStatement(sq);
-            st.setInt(1,user.getId());
+            st.setInt(1, user.getId());
             ResultSet rs = st.executeQuery();
             if (rs == null) {
                 System.out.println(" No hay registros en la base de datos");

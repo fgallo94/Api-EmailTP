@@ -14,7 +14,6 @@ public class Config {
     AuthFilter authFilter;
 
 
-
     @Bean
     public FilterRegistrationBean myFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();

@@ -15,37 +15,37 @@ public class User {
     private String state;
     private String country;
     private String email;
-    private boolean eliminado;
+    private boolean deleted;
     private int id;
 
 
-    public User(){
-        userName="";
-        pass="";
-        name="";
-        surname="";
-        adress="";
-        phone="";
-        city="";
-        state="";
-        country="";
-        email="";
-        eliminado=false;
-        id=0;
+    public User() {
+        userName = "";
+        pass = "";
+        name = "";
+        surname = "";
+        adress = "";
+        phone = "";
+        city = "";
+        state = "";
+        country = "";
+        email = "";
+        deleted = false;
+        id = 0;
     }
 
     public User(String userName, String pass, String name, String surname,
-    String adress, String phone, String city, String state, String country,String email){
-        this.userName=userName;
-        this.pass=pass;
-        this.name=name;
-        this.surname=surname;
-        this.adress=adress;
-        this.phone=phone;
-        this.city=city;
-        this.state=state;
-        this.country=country;
-        this.email=email;
+                String adress, String phone, String city, String state, String country, String email) {
+        this.userName = userName;
+        this.pass = pass;
+        this.name = name;
+        this.surname = surname;
+        this.adress = adress;
+        this.phone = phone;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.email = email;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class User {
 
         User user = (User) o;
 
-        if (eliminado != user.eliminado) return false;
+        if (deleted != user.deleted) return false;
         if (id != user.id) return false;
         if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
         if (pass != null ? !pass.equals(user.pass) : user.pass != null) return false;
@@ -69,7 +69,7 @@ public class User {
         result = 31 * result + (pass != null ? pass.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
-        result = 31 * result + (eliminado ? 1 : 0);
+        result = 31 * result + (deleted ? 1 : 0);
         result = 31 * result + id;
         return result;
     }
@@ -155,12 +155,12 @@ public class User {
         this.surname = surname;
     }
 
-    public boolean isEliminado() {
-        return eliminado;
+    public boolean isDeleted() {
+        return deleted;
     }
 
-    public void setEliminado(boolean eliminado) {
-        this.eliminado = eliminado;
+    public void setDeleted(boolean eliminado) {
+        this.deleted = eliminado;
     }
 
     public int getId() {

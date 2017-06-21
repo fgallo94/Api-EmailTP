@@ -1,6 +1,7 @@
 package com.utn.api.email.dao;
 
 import org.springframework.stereotype.Repository;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ public class DaoConexion {
             e.printStackTrace();
         }
     }
+
     //Conecta la base de datos con getConnection y los datos de nuestra base de datos, en caso de no poder ejectura la Excepcion
     public void conectar() throws SQLException {
         try {
@@ -31,6 +33,7 @@ public class DaoConexion {
             throw e;
         }
     }
+
     //verifica con el class.forName si el driver es el correcto
     private void verificarDriver() throws ClassNotFoundException {
         try {
@@ -40,6 +43,7 @@ public class DaoConexion {
             throw e;
         }
     }
+
     //Intenta desconectar la base de datos, en caso de no poder arroja excepcion
     public void desconectar() throws Exception {
         try {
@@ -50,6 +54,7 @@ public class DaoConexion {
             throw e;
         }
     }
+
     //get que retorna la conexion
     public Connection getConn() {
         return conn;

@@ -16,24 +16,24 @@ public class DaoUsers {
     private DaoConexion conn;
 
 
-    public User byUserName(String user,String pwd) throws Exception {
+    public User byUserName(String user, String pwd) throws Exception {
         String sq = "select * from Users where username=? and password=?";
-        User u= new User();
+        User u = new User();
         try {
             conn.conectar();
             PreparedStatement st = conn.getConn().prepareStatement(sq);
             st.setString(1, user);
-            st.setString(2,pwd);
+            st.setString(2, pwd);
             ResultSet rs = st.executeQuery();
             if (!rs.next()) {
                 System.out.println(" No hay registros en la base de datos");
-            }else {
+            } else {
                 u.setId(rs.getInt("id"));
                 u.setName(rs.getString("name"));
                 u.setSurname(rs.getString("surname"));
                 u.setPass(rs.getString("password"));
                 u.setUserName(rs.getString("username"));
-                u.setEliminado(rs.getBoolean("deleted"));
+                u.setDeleted(rs.getBoolean("deleted"));
                 u.setAdress(rs.getString("adress"));
                 u.setPhone(rs.getString("phone"));
                 u.setCity(rs.getString("city"));
@@ -55,7 +55,7 @@ public class DaoUsers {
 
     public User byUser(String user) throws Exception {
         String sq = "select * from Users where username=?";
-        User u= new User();
+        User u = new User();
         try {
             conn.conectar();
             PreparedStatement st = conn.getConn().prepareStatement(sq);
@@ -63,20 +63,21 @@ public class DaoUsers {
             ResultSet rs = st.executeQuery();
             if (!rs.next()) {
                 System.out.println(" No hay registros en la base de datos");
-            }else {
+            } else {
                 u.setId(rs.getInt("id"));
                 u.setName(rs.getString("name"));
                 u.setSurname(rs.getString("surname"));
                 u.setPass(rs.getString("password"));
                 u.setUserName(rs.getString("username"));
-                u.setEliminado(rs.getBoolean("deleted"));
+                u.setDeleted(rs.getBoolean("deleted"));
                 u.setAdress(rs.getString("adress"));
                 u.setPhone(rs.getString("phone"));
                 u.setCity(rs.getString("city"));
                 u.setState(rs.getString("state"));
                 u.setCountry(rs.getString("country"));
                 u.setEmail(rs.getString("email"));
-            }} catch (SQLException s) {
+            }
+        } catch (SQLException s) {
             s.printStackTrace();
         } finally {
             try {
@@ -90,7 +91,7 @@ public class DaoUsers {
 
     public User byId(int user) throws Exception {
         String sq = "select * from Users where id=?";
-        User u= new User();
+        User u = new User();
         try {
             conn.conectar();
             PreparedStatement st = conn.getConn().prepareStatement(sq);
@@ -98,20 +99,21 @@ public class DaoUsers {
             ResultSet rs = st.executeQuery();
             if (!rs.next()) {
                 System.out.println(" No hay registros en la base de datos");
-            }else {
+            } else {
                 u.setId(rs.getInt("id"));
                 u.setName(rs.getString("name"));
                 u.setSurname(rs.getString("surname"));
                 u.setPass(rs.getString("password"));
                 u.setUserName(rs.getString("username"));
-                u.setEliminado(rs.getBoolean("deleted"));
+                u.setDeleted(rs.getBoolean("deleted"));
                 u.setAdress(rs.getString("adress"));
                 u.setPhone(rs.getString("phone"));
                 u.setCity(rs.getString("city"));
                 u.setState(rs.getString("state"));
                 u.setCountry(rs.getString("country"));
                 u.setEmail(rs.getString("email"));
-            }} catch (SQLException s) {
+            }
+        } catch (SQLException s) {
             s.printStackTrace();
         } finally {
             try {
@@ -124,9 +126,6 @@ public class DaoUsers {
     }
 
 
-
-
-
     public void addUser(User user) throws Exception {
         String sq = "insert into Users(id,username,password,name,surname,deleted,adress,phone,city,state,country,email) values (?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
@@ -136,14 +135,14 @@ public class DaoUsers {
             st.setString(2, user.getUserName());
             st.setString(3, user.getPass());
             st.setString(4, user.getName());
-            st.setString(5,user.getSurname());
-            st.setBoolean(6,user.isEliminado());
-            st.setString(7,user.getAdress());
-            st.setString(8,user.getPhone());
-            st.setString(9,user.getCity());
-            st.setString(10,user.getState());
-            st.setString(11,user.getCountry());
-            st.setString(12,user.getEmail());
+            st.setString(5, user.getSurname());
+            st.setBoolean(6, user.isDeleted());
+            st.setString(7, user.getAdress());
+            st.setString(8, user.getPhone());
+            st.setString(9, user.getCity());
+            st.setString(10, user.getState());
+            st.setString(11, user.getCountry());
+            st.setString(12, user.getEmail());
             st.executeUpdate();
         }
         //Se ejecuta excepcion en caso de error
@@ -159,6 +158,7 @@ public class DaoUsers {
             }
         }
     }
+
     public ArrayList<User> listUser() throws Exception {
         String sq = "select * from Users where deleted=false";
         ArrayList<User> lista = new ArrayList<User>();
@@ -170,13 +170,13 @@ public class DaoUsers {
                 System.out.println(" No hay registros en la base de datos");
             }
             while (rs.next()) {
-                User u=new User();
+                User u = new User();
                 u.setId(rs.getInt("id"));
                 u.setName(rs.getString("name"));
                 u.setSurname(rs.getString("surname"));
                 u.setPass(rs.getString("password"));
                 u.setUserName(rs.getString("username"));
-                u.setEliminado(rs.getBoolean("deleted"));
+                u.setDeleted(rs.getBoolean("deleted"));
                 u.setAdress(rs.getString("adress"));
                 u.setPhone(rs.getString("phone"));
                 u.setCity(rs.getString("city"));
@@ -197,31 +197,31 @@ public class DaoUsers {
         return lista;
     }
 
-    public void delete(User user) throws Exception{
-        String sq="update Users set deleted=true where id=?";
-        try{
+    public void delete(User user) throws Exception {
+        String sq = "update Users set deleted=true where id=?";
+        try {
             conn.conectar();
-            PreparedStatement st= conn.getConn().prepareStatement(sq);
-            st.setInt(1,user.getId());
+            PreparedStatement st = conn.getConn().prepareStatement(sq);
+            st.setInt(1, user.getId());
             st.executeUpdate();
-        }catch(SQLException s){
+        } catch (SQLException s) {
             s.printStackTrace();
-        }finally {
-            try{
+        } finally {
+            try {
                 conn.desconectar();
-            }catch(Exception x){
+            } catch (Exception x) {
                 x.printStackTrace();
             }
         }
     }
 
 
-    public int lastInsertId() throws Exception{
-        String sq="Select Last_Insert_Id() into Users";
+    public int lastInsertId() throws Exception {
+        String sq = "Select Last_Insert_Id() into Users";
         int id = 0;
-        try{
+        try {
             conn.conectar();
-            PreparedStatement st= conn.getConn().prepareStatement(sq);
+            PreparedStatement st = conn.getConn().prepareStatement(sq);
             ResultSet rs = st.executeQuery();
             if (rs == null) {
                 System.out.println(" No hay registros en la base de datos");
@@ -229,12 +229,12 @@ public class DaoUsers {
             while (rs.next()) {
                 id = rs.getInt("id");
             }
-            }catch(SQLException s){
+        } catch (SQLException s) {
             s.printStackTrace();
-        }finally {
-            try{
+        } finally {
+            try {
                 conn.desconectar();
-            }catch(Exception x){
+            } catch (Exception x) {
                 x.printStackTrace();
             }
         }

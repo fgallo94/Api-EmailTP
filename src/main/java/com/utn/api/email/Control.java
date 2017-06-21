@@ -134,15 +134,15 @@ public class Control {
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
-    private List<UserWrapper> convertList(List<User> users){
+    private List<UserWrapper> convertList(List<User> users) {
         List<UserWrapper> userWrapperList = new ArrayList<UserWrapper>();
-        for (User u: users) {
+        for (User u : users) {
             userWrapperList.add(this.convertUser(u));
         }
         return userWrapperList;
     }
 
-    private UserWrapper convertUser (User user){
+    private UserWrapper convertUser(User user) {
         UserWrapper u = new UserWrapper();
         u.setName(user.getName());
         u.setSurname(user.getSurname());
