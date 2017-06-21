@@ -8,6 +8,7 @@ import org.junit.Test;
 public class UserTest extends TestCase {
 
     User user;
+    User user1;
 
     @Before
     public void setUp() throws Exception {
@@ -25,6 +26,9 @@ public class UserTest extends TestCase {
         user.setEmail("jose@hotmail.com");
         user.setDeleted(false);
         user.setId(67);
+        user1=new User("galli12","asdasdasd","Jose","Albertii","Libertad 3245"
+                ,"2262728394","Mar del Plata","Buenos Aires","Argentina","jose@hotmail.com");
+
     }
 
     @Test
@@ -32,6 +36,17 @@ public class UserTest extends TestCase {
         assertEquals("test adress", user.getAdress(), "Libertad 3245");
     }
 
+    @Test
+    public void testConstructor(){
+        user1.setId(67);
+        user1.getUserName();
+        assertTrue(!user1.equals(user));
+    }
+
+    @Test
+    public void testHashCode(){
+        assertTrue(user.hashCode() != user1.hashCode());
+    }
 
     @Test
     public void testId() {

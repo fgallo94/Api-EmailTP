@@ -44,6 +44,11 @@ public class MessageTest extends TestCase {
         assertEquals("test constructor",message=new Message(user,"19/06/2017",user1,"asunto","cuerpo"),message);
     }
     @Test
+    public void testHashCode(){
+        assertTrue(message.hashCode() == message1.hashCode());
+    }
+
+    @Test
     public void testFecha(){
         assertEquals("test fecha",message.getFecha(),"19/06/2017");
     }
