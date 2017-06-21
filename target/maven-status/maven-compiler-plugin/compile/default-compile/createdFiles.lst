@@ -3,6 +3,7 @@ com/utn/api/email/dao/DaoConexion.class
 com/utn/api/email/response/LoginResponseWrapper.class
 com/utn/api/email/App.class
 com/utn/api/email/Config.class
+com/utn/api/email/response/UserWrapper.class
 com/utn/api/email/util/AuthenticationData.class
 com/utn/api/email/AuthFilter$HeaderMapRequestWrapper.class
 com/utn/api/email/Control.class
