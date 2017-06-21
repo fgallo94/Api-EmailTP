@@ -37,6 +37,7 @@
                 <check />
             </configuration>
         </plugin>
+
         </plugins>
     </build>
     <dependencies>

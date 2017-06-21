@@ -1,12 +1,13 @@
 /home/fede/ApiEmail/src/main/java/com/utn/api/email/dao/DaoMessages.java
-/home/fede/ApiEmail/src/main/java/com/utn/api/email/App.java
-/home/fede/ApiEmail/src/main/java/com/utn/api/email/AuthFilter.java
 /home/fede/ApiEmail/src/main/java/com/utn/api/email/Control.java
 /home/fede/ApiEmail/src/main/java/com/utn/api/email/User.java
 /home/fede/ApiEmail/src/main/java/com/utn/api/email/dao/DaoConexion.java
+/home/fede/ApiEmail/src/main/java/com/utn/api/email/response/UserWrapper.java
 /home/fede/ApiEmail/src/main/java/com/utn/api/email/response/LoginResponseWrapper.java
 /home/fede/ApiEmail/src/main/java/com/utn/api/email/Config.java
-/home/fede/ApiEmail/src/main/java/com/utn/api/email/util/AuthenticationData.java
 /home/fede/ApiEmail/src/main/java/com/utn/api/email/util/SessionData.java
 /home/fede/ApiEmail/src/main/java/com/utn/api/email/dao/DaoUsers.java
+/home/fede/ApiEmail/src/main/java/com/utn/api/email/App.java
+/home/fede/ApiEmail/src/main/java/com/utn/api/email/AuthFilter.java
+/home/fede/ApiEmail/src/main/java/com/utn/api/email/util/AuthenticationData.java
 /home/fede/ApiEmail/src/main/java/com/utn/api/email/Message.java
