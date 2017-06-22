@@ -14,7 +14,7 @@ import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ControlTest extends TestCase {
+public class DaoMessagesTest extends TestCase {
     DaoMessages daoMessages;
     Connection conn;
     PreparedStatement ps;
@@ -45,20 +45,6 @@ public class ControlTest extends TestCase {
         }
     }
 
-   /* @Test
-    public void testTraerIdNull() {
-        try {
-            when(conn.prepareStatement(anyString())).thenReturn(ps);
-            when(ps.executeQuery()).thenReturn(rs);
-            when(rs.next()).thenReturn(false);
-            ArrayList<Message> m = daoMessages.inbox(user);
-            assertNull(m);
-
-        } catch(Exception e){
-            fail();
-        }
-    }
-*/
     @Test
     public void testTraerException() {
         try {
