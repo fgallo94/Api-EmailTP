@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/gallito1994/ApiEmail.svg?branch=master)](https://travis-ci.org/gallito1994/ApiEmail)
-
+[![Build Status](https://travis-ci.org/fgallo94/ApiEmail.svg?branch=master)](https://travis-ci.org/fgallo94/ApiEmail)
 
 #ApiEmail
